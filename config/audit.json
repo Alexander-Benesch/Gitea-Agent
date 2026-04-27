@@ -1,0 +1,5 @@
+{
+  "sinks": [
+    {"type": "jsonl", "path": "data/logs/agent.jsonl", "rotation": "daily"}
+  ]
+}

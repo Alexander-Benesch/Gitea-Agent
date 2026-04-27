@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "patterns": [
+    {"from": "IssueReady", "to": "PlanCreated", "count": 10},
+    {"from": "PlanCreated", "to": "PlanValidated", "count": 10},
+    {"from": "PlanValidated", "to": "PlanPosted", "count": 10},
+    {"from": "PlanPosted", "to": "PlanApproved", "count": 8},
+    {"from": "PlanApproved", "to": "CodeGenerated", "count": 8},
+    {"from": "CodeGenerated", "to": "QualityPassed", "count": 7},
+    {"from": "QualityPassed", "to": "PRCreated", "count": 7},
+    {"from": "PRCreated", "to": "EvalCompleted", "count": 6},
+    {"from": "PlanPosted", "to": "PlanFeedbackReceived", "count": 3},
+    {"from": "PlanFeedbackReceived", "to": "PlanRetry", "count": 3},
+    {"from": "PlanRetry", "to": "PlanRevised", "count": 3},
+    {"from": "PlanRevised", "to": "PlanPosted", "count": 3},
+    {"from": "CodeGenerated", "to": "QualityFailed", "count": 2},
+    {"from": "QualityFailed", "to": "QualityRetry", "count": 2},
+    {"from": "QualityRetry", "to": "CodeGenerated", "count": 2},
+    {"from": "PRCreated", "to": "EvalFailed", "count": 1},
+    {"from": "EvalFailed", "to": "HealingFailed", "count": 1}
+  ],
+  "terminal_events": [
+    "PRCreated", "WorkflowBlocked", "LLMUnavailable",
+    "PlanBlocked", "WorkflowAborted", "EvalFailed",
+    "TokenLimitHit", "GateFailed", "HealingFailed", "ImplementationFailed"
+  ]
+}

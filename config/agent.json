@@ -1,0 +1,51 @@
+{
+  "log_level": "INFO",
+  "log_file": null,
+  "data_dir": "data",
+  "config_dir": "config",
+  "max_parallel": 1,
+  "mode": "standard",
+  "sequence_validator": "block",
+  "scm": {
+    "max_retries": 2,
+    "transient_codes": [502, 503, 504],
+    "tls_verify": true,
+    "ca_bundle": null
+  },
+  "git": {
+    "timeout": 30
+  },
+  "eval": {
+    "request_timeout": 10,
+    "history_max": 90,
+    "step_delay_seconds": 2
+  },
+  "auto": {
+    "poll_interval": 30,
+    "poll_timeout": 7200,
+    "cooldown_seconds": 120
+  },
+  "context": {
+    "max_file_size_kb": 50,
+    "max_skeleton_file_size_kb": 20,
+    "exclude_dirs": [
+      "__pycache__", ".git", ".venv", "venv", "node_modules",
+      ".tox", ".mypy_cache", ".pytest_cache", "dist", "build",
+      ".direnv", ".eggs", "*.egg-info", ".ruff_cache", "coverage",
+      ".coverage", "htmlcov", ".hypothesis", ".nox", ".cache"
+    ],
+    "exclude_files": [
+      "package-lock.json", "yarn.lock", "pnpm-lock.yaml",
+      "poetry.lock", "Pipfile.lock", "uv.lock"
+    ],
+    "keyword_extensions": [".py", ".js", ".ts", ".go", ".java", ".rs", ".rb"]
+  },
+  "logging": {
+    "max_log_size_mb": 10
+  },
+  "network": {
+    "timeout": 60,
+    "http_proxy": null,
+    "https_proxy": null
+  }
+}

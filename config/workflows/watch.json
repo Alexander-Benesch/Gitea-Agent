@@ -1,0 +1,11 @@
+{
+  "name": "watch",
+  "steps": [
+    {"on": "ScanIssues", "send": "PlanIssue"},
+    {"on": "PlanValidated", "send": "Implement"},
+    {"on": "CodeGenerated", "send": "Evaluate"},
+    {"on": "EvalCompleted", "send": "CreatePR"}
+  ],
+  "max_risk": 3,
+  "max_parallel": 2
+}

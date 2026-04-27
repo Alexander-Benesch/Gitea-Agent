@@ -1,0 +1,21 @@
+{
+  "adapters": [
+    {
+      "type": "slack",
+      "enabled": false,
+      "webhook_url": "",
+      "channel": "#samuel-alerts"
+    },
+    {
+      "type": "teams",
+      "enabled": false,
+      "webhook_url": ""
+    },
+    {
+      "type": "generic_webhook",
+      "enabled": false,
+      "url": "",
+      "headers": {}
+    }
+  ]
+}

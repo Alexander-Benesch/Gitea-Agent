@@ -1,0 +1,13 @@
+{
+  "name": "autonomous",
+  "steps": [
+    {"on": "IssueReady", "send": "PlanIssue"},
+    {"on": "PlanValidated", "send": "Implement"},
+    {"on": "CodeGenerated", "send": "Evaluate"},
+    {"on": "EvalCompleted", "send": "CreatePR"},
+    {"on": "PRCreated", "send": "Review"},
+    {"on": "ReviewCompleted", "send": "MergePR", "condition": "review_passed"}
+  ],
+  "max_risk": 2,
+  "max_parallel": 1
+}

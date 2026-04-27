@@ -1,0 +1,10 @@
+{
+  "weights": {
+    "test_pass_rate": 0.3,
+    "syntax_valid": 0.2,
+    "hallucination_free": 0.3,
+    "scope_compliant": 0.2
+  },
+  "baseline": 0.8,
+  "fail_fast_on": ["syntax_valid"]
+}

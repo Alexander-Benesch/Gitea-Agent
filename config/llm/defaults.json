@@ -1,0 +1,20 @@
+{
+  "default": {
+    "max_tokens": 4096,
+    "temperature": 0.2,
+    "timeout": 60
+  },
+  "tasks": {
+    "plan": {"max_tokens": 4096, "temperature": 0.3},
+    "implement": {"max_tokens": 8192, "temperature": 0.1},
+    "review": {"max_tokens": 4096, "temperature": 0.2},
+    "heal": {"max_tokens": 4096, "temperature": 0.2},
+    "eval": {"max_tokens": 2048, "temperature": 0.0}
+  },
+  "circuit_breaker": {
+    "failure_threshold": 3,
+    "cooldown_seconds": 120
+  },
+  "pricing_cache_hours": 24,
+  "response_size_limit_bytes": 10485760
+}

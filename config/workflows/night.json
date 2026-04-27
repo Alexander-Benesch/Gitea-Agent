@@ -1,0 +1,11 @@
+{
+  "name": "night",
+  "steps": [
+    {"on": "ScanIssues", "send": "PlanIssue", "condition": "risk <= 1"},
+    {"on": "PlanValidated", "send": "Implement"},
+    {"on": "CodeGenerated", "send": "Evaluate"},
+    {"on": "EvalCompleted", "send": "CreatePR"}
+  ],
+  "max_risk": 1,
+  "max_parallel": 1
+}

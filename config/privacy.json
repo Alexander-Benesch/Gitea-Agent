@@ -1,0 +1,20 @@
+{
+  "pii_scrubbing": {
+    "enabled": true,
+    "patterns": ["email", "ip_address", "phone", "credit_card"],
+    "replacement": "[REDACTED:{type}]"
+  },
+  "retention": {
+    "audit_log_days": 365,
+    "pii_anonymize_after_days": 30
+  },
+  "allowed_regions": ["EU", "EEA", "CH"],
+  "provider_locations": {
+    "ollama": "local",
+    "lmstudio": "local",
+    "deepseek": "CN",
+    "anthropic": "US",
+    "openai": "US"
+  },
+  "transfer_warning": true
+}

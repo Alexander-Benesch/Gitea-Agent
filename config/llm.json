@@ -1,0 +1,19 @@
+{
+  "default": {
+    "provider": "deepseek"
+  },
+  "deepseek": {
+    "model": "deepseek-chat"
+  },
+  "claude": {
+    "model": "claude-sonnet-4-6"
+  },
+  "ollama": {
+    "model": "llama3",
+    "url": "http://localhost:11434"
+  },
+  "lmstudio": {
+    "model": "local-model",
+    "url": "http://localhost:1234/v1"
+  }
+}

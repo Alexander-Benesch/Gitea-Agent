@@ -1,0 +1,11 @@
+{
+  "name": "patch",
+  "steps": [
+    {"on": "ScanIssues", "send": "PlanIssue", "condition": "no_auto_issues"},
+    {"on": "PlanValidated", "send": "Implement"},
+    {"on": "CodeGenerated", "send": "Evaluate"},
+    {"on": "EvalCompleted", "send": "CreatePR"}
+  ],
+  "max_risk": 2,
+  "max_parallel": 1
+}

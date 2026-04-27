@@ -1,0 +1,21 @@
+{
+  "labels": [
+    {"name": "ready-for-agent", "color": "0e8a16", "description": "Issue ist bereit für Agent-Bearbeitung", "category": "workflow"},
+    {"name": "in-progress", "color": "1d76db", "description": "Agent arbeitet aktiv an diesem Issue", "category": "workflow"},
+    {"name": "needs-review", "color": "fbca04", "description": "Agent hat PR erstellt, wartet auf Review", "category": "workflow"},
+    {"name": "help wanted", "color": "d93f0b", "description": "Agent ist blockiert, manuelle Hilfe nötig", "category": "workflow"},
+
+    {"name": "status:plan", "color": "c5def5", "description": "Plan wird erstellt/geprüft", "category": "status"},
+    {"name": "status:approved", "color": "0052cc", "description": "Plan wurde genehmigt", "category": "status"},
+    {"name": "status:wip", "color": "5319e7", "description": "Implementation läuft", "category": "status"},
+    {"name": "status:done", "color": "2ea44f", "description": "Abgeschlossen", "category": "status"},
+
+    {"name": "risk:low", "color": "c2e0c6", "description": "Niedriges Risiko", "category": "risk"},
+    {"name": "risk:medium", "color": "fef2c0", "description": "Mittleres Risiko", "category": "risk"},
+    {"name": "risk:high", "color": "f9d0c4", "description": "Hohes Risiko", "category": "risk"},
+    {"name": "risk:critical", "color": "b60205", "description": "Kritisches Risiko", "category": "risk"},
+
+    {"name": "scope:own", "color": "5319e7", "description": "Agent arbeitet an sich selbst (Self-Mode)", "category": "scope"},
+    {"name": "scope:foreign", "color": "bfdadc", "description": "Agent arbeitet an Ziel-Projekt", "category": "scope"}
+  ]
+}

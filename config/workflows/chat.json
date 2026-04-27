@@ -1,0 +1,11 @@
+{
+  "name": "chat",
+  "steps": [
+    {"on": "IssueReady", "send": "PlanIssue"},
+    {"on": "PlanApproved", "send": "Implement"},
+    {"on": "CodeGenerated", "send": "Evaluate"},
+    {"on": "EvalCompleted", "send": "CreatePR", "condition": "lock_acquired"}
+  ],
+  "max_risk": 3,
+  "max_parallel": 1
+}

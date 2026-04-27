@@ -1,0 +1,44 @@
+#!/bin/bash
+# S.A.M.U.E.L. pre-receive hook for Gitea
+# Deploy to: <gitea-data>/gitea/repositories/<owner>/<repo>.git/hooks/pre-receive
+#
+# This is the server-side enforcement. It cannot be bypassed with --no-verify.
+# The client-side pre-commit hook is best-effort; this hook is the real gate.
+
+set -euo pipefail
+
+PROTECTED_BRANCHES="main master"
+ALLOW_FORCE_PUSH="${SAMUEL_ALLOW_FORCE_PUSH:-false}"
+
+while read -r oldrev newrev refname; do
+    branch="${refname#refs/heads/}"
+
+    for protected in $PROTECTED_BRANCHES; do
+        if [ "$branch" = "$protected" ]; then
+            # Block direct pushes to protected branches
+            # Only merge commits from PRs are allowed (Gitea handles this via branch protection)
+            if [ "$ALLOW_FORCE_PUSH" != "true" ]; then
+                # Check if this is a force push (non-fast-forward)
+                if [ "$oldrev" != "0000000000000000000000000000000000000000" ]; then
+                    if ! git merge-base --is-ancestor "$oldrev" "$newrev" 2>/dev/null; then
+                        echo "*** REJECTED: Force push to $protected is not allowed."
+                        echo "*** Use a pull request to merge changes."
+                        exit 1
+                    fi
+                fi
+            fi
+        fi
+    done
+
+    # Block pushes that delete protected branches
+    if [ "$newrev" = "0000000000000000000000000000000000000000" ]; then
+        for protected in $PROTECTED_BRANCHES; do
+            if [ "$branch" = "$protected" ]; then
+                echo "*** REJECTED: Cannot delete protected branch $protected."
+                exit 1
+            fi
+        done
+    fi
+done
+
+exit 0

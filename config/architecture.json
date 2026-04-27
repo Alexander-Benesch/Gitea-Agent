@@ -1,0 +1,102 @@
+{
+  "global_constraints": [
+    "Kein Slice importiert einen anderen Slice",
+    "Slices importieren nur den Shared Kernel (samuel.core.*)",
+    "Externe Systeme nur über Ports (samuel.core.ports)",
+    "Tests leben beim Slice: samuel/slices/*/tests/",
+    "Aller Python-Code unter samuel/"
+  ],
+  "modules": [
+    {
+      "path": "samuel/server.py",
+      "role": "dashboard-frontend",
+      "description": "HTTP-Server + Dashboard-HTML. Enthält großen inline DASHBOARD_HTML-String mit CSS/JS.",
+      "constraints": [
+        "UI/Frontend-Änderungen sind erlaubt (HTML, CSS, JS inline)",
+        "Keine Backend-Logik einführen — die gehört in Slices",
+        "Keine Config-Dateien ändern bei reinen UI-Issues",
+        "Bestehende API-Endpoints (/api/v1/dashboard/*) unverändert lassen"
+      ]
+    },
+    {
+      "path": "samuel/cli.py",
+      "role": "cli-entrypoint",
+      "description": "argparse-basierte CLI. Subcommands: watch, run, health, dashboard, setup-labels.",
+      "constraints": [
+        "Nur CLI-Parsing hier; Business-Logik in Slices oder core",
+        "Neue Subcommands als _cmd_<name> Funktionen anlegen"
+      ]
+    },
+    {
+      "path": "samuel/core/",
+      "role": "shared-kernel",
+      "description": "Kern-Infrastruktur (Bus, Events, Ports, Config, Types).",
+      "constraints": [
+        "Minimal halten — neue Module brauchen Diskussion",
+        "Keine Imports aus slices/ oder adapters/",
+        "Keine externen Abhängigkeiten (nur stdlib)"
+      ]
+    },
+    {
+      "path": "samuel/slices/",
+      "role": "business-logic",
+      "description": "Vertikale Slices mit Handler + Tests.",
+      "constraints": [
+        "Jeder Slice: handler.py + tests/test_handler.py minimum",
+        "Kein cross-slice Import",
+        "Externe Systeme nur über core.ports Interfaces"
+      ]
+    },
+    {
+      "path": "samuel/adapters/",
+      "role": "external-adapters",
+      "description": "Implementierungen der core.ports-Interfaces für externe Systeme.",
+      "constraints": [
+        "Implementiert ein oder mehrere Ports aus core.ports",
+        "Pro externes System ein eigenes Verzeichnis",
+        "Keine Business-Logik — reine Translation"
+      ]
+    },
+    {
+      "path": "config/",
+      "role": "configuration",
+      "description": "JSON-Configs (agent.json, features.json, labels.json, etc.)",
+      "constraints": [
+        "Nur zur Laufzeit-Konfiguration",
+        "Kein Code hier",
+        "Schema-Validierung in samuel.core.config"
+      ]
+    },
+    {
+      "path": "tests/",
+      "role": "integration-tests",
+      "description": "Repository-weite Tests (Architecture, E2E, Port-Contracts).",
+      "constraints": [
+        "Slice-spezifische Tests gehören in samuel/slices/*/tests/",
+        "Hier nur übergreifende Architecture/E2E/Port-Contract-Tests"
+      ]
+    }
+  ],
+  "expansion_policy": {
+    "dashboard-frontend": {
+      "allowed_scopes": ["samuel/server.py", "samuel/slices/dashboard/", "tests/test_server_dashboard.py"],
+      "blocked_scopes": ["config/", "samuel/core/", "samuel/adapters/"]
+    },
+    "cli-entrypoint": {
+      "allowed_scopes": ["samuel/cli.py", "samuel/__init__.py", "samuel/__main__.py", "samuel/core/bootstrap.py", "samuel/core/commands.py", "samuel/core/events.py"],
+      "blocked_scopes": ["config/", "samuel/slices/", "samuel/adapters/"]
+    },
+    "shared-kernel": {
+      "allowed_scopes": ["samuel/core/", "tests/"],
+      "blocked_scopes": ["samuel/slices/", "samuel/adapters/", "config/"]
+    },
+    "business-logic": {
+      "allowed_scopes": ["samuel/slices/", "samuel/core/ports.py", "samuel/core/commands.py", "samuel/core/events.py", "tests/"],
+      "blocked_scopes": ["samuel/adapters/"]
+    },
+    "external-adapters": {
+      "allowed_scopes": ["samuel/adapters/", "samuel/core/ports.py", "tests/"],
+      "blocked_scopes": ["samuel/slices/"]
+    }
+  }
+}

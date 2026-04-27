@@ -1,0 +1,12 @@
+{
+  "quality_checks": {
+    "disabled": [],
+    "extensions": {
+      ".py": ["PythonSyntaxCheck"],
+      ".ts": ["TreeSitterTypeScriptCheck"],
+      ".tsx": ["TreeSitterTypeScriptCheck"],
+      ".js": ["TreeSitterTypeScriptCheck"],
+      "*": ["DiffSizeCheck", "ScopeGuard"]
+    }
+  }
+}

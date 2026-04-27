@@ -1,0 +1,12 @@
+{
+  "name": "self",
+  "steps": [
+    {"on": "IssueReady", "send": "PlanIssue"},
+    {"on": "PlanValidated", "send": "Implement"},
+    {"on": "CodeGenerated", "send": "RunQuality"},
+    {"on": "QualityPassed", "send": "Evaluate"},
+    {"on": "EvalCompleted", "send": "CreatePR", "condition": "self_parity_ok"}
+  ],
+  "max_risk": 2,
+  "max_parallel": 1
+}

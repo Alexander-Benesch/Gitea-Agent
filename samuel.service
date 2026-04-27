@@ -1,0 +1,16 @@
+[Unit]
+Description=S.A.M.U.E.L. Agent
+After=network.target
+
+[Service]
+Type=simple
+User=ki02
+WorkingDirectory=/home/ki02/samuel
+EnvironmentFile=/home/ki02/samuel/.env
+ExecStart=/home/ki02/samuel/.venv/bin/python -m samuel watch
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target

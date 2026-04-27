@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=68.0", "setuptools-scm"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "samuel"
+version = "2.0.0-alpha"
+description = "Sicheres Autonomes Mehrschichtiges Ueberwachungs- und Entwicklungs-Logiksystem"
+requires-python = ">=3.10"
+license = {text = "Proprietary"}
+dependencies = [
+    "pydantic>=2.0,<3",
+]
+
+[project.optional-dependencies]
+dashboard = [
+    "jinja2>=3.1",
+]
+llm = [
+    "anthropic>=0.40,<1",
+    "openai>=1.50,<2",
+]
+github = [
+    "cryptography>=43",
+]
+tree-sitter = [
+    "tree-sitter>=0.24,<1",
+    "tree-sitter-python>=0.24",
+    "tree-sitter-javascript>=0.24",
+    "tree-sitter-typescript>=0.23",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+    "ruff>=0.8",
+    "mypy>=1.13",
+]
+ci = [
+    "pip-audit>=2.7",
+]
+all = [
+    "samuel[dashboard,llm,github,tree-sitter,dev,ci]",
+]
+
+[project.scripts]
+samuel = "samuel.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["samuel*"]
+
+[tool.setuptools.package-data]
+samuel = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "samuel"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --tb=short"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+ignore = ["E501", "E741", "B007", "SIM102"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true

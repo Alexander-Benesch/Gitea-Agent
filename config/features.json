@@ -1,0 +1,16 @@
+{
+  "eval": true,
+  "watch": true,
+  "healing": false,
+  "auto_issues": false,
+  "changelog": false,
+  "auto_implement_llm": true,
+  "auto_merge_pr": false,
+  "hallucination_guard": true,
+  "sequence_validator": true,
+  "scope_guard": true,
+  "acceptance_check": true,
+  "llm_attribution": true,
+  "health_checks": true,
+  "architecture_context": true
+}
